@@ -1,0 +1,106 @@
+%%%%%%%%%%%%%%% COMMON %%%%%%%%%%%%%%%
+% grid frequency
+f_fundamental = 50
+
+% frequency of switch
+f_sw = 20e3
+
+% dab module rated power
+p_dab0 = 23.81e3 % for HVAC
+p_dab = 66.67 % for others
+
+% On-resistance of MOSFET
+r_on = 13e-3
+
+% transformer
+n = 1 % rated ratio
+c_stray = 0 % stray capacitance
+
+% frequency of controller
+ts = 2/f_sw       % sample time (s)
+
+
+%%%%%%%%%%%%%%% HVAC %%%%%%%%%%%%%%%
+% line voltage of grid
+ul_ref_ha = 10e3
+
+% number of modules in series
+n_ha = 14
+
+% leak inductance of hf transformer 
+l_ha = 46e-6
+
+% capacitance of DC-link
+c_ha = 1e-3
+
+% initial voltage of c_ha
+uc_ha = 700
+
+% reference voltage for module
+um_ref_ha = 720
+
+% power factor angle (radians)
+phi_ha = 0
+
+%%%%%%%%%%%%%%% HVDC %%%%%%%%%%%%%%%
+% number of modules for each phase
+n_hd = 5
+
+% leak inductance of hf transformer 
+l_hd = 16e-6
+
+% capacitance of DC-link
+c_hd = 1e-3
+
+% reference voltage for module
+um_ref_hd = 666.7
+
+%%%%%%%%%%%%%%% LVDC %%%%%%%%%%%%%%%
+% number of modules for each phase
+n_ld = 5
+
+% leak inductance of hf transformer 
+l_ld = 16e-6
+
+% capacitance of DC-link
+c_ld = 1e-3
+
+% reference voltage for module
+um_ref_ld = 750
+
+%%%%%%%%%%%%%%% LVAC %%%%%%%%%%%%%%%
+% line voltage of grid
+ul_ref_la = 380
+
+% number of modules in series
+n_la = 5
+
+% leak inductance of hf transformer 
+l_ha = 16e-6
+
+% capacitance of DC-link
+c_la = 1e-3
+
+% reference voltage for module
+um_ref_la = 700
+
+% filter
+lf_la = 54e-6
+cf_la = 700e-6
+
+
+%%%%%%%%%%%%%%% Digital PI controller %%%%%%%%%%%%%%%
+% HVAC
+kp_ha0 = 1    % proportional gain
+ki_ha0 = 0      % integral gain
+kd_ha0 = 0       % derivative gain
+
+kp_ha1 = 1    % proportional gain
+ki_ha1 = 0      % integral gain
+kd_ha1 = 0       % derivative gain
+
+kp_ha2 = 1    % proportional gain
+ki_ha2 = 0      % integral gain
+kd_ha2 = 0       % derivative gain
+
+
