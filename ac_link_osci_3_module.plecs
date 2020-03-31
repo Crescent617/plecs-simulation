@@ -25,14 +25,14 @@ Plecs {
   AssertionAction "1"
   InitializationCommands "%%%%%%%%%%%%%%% DAB %%%%%%%%%%%%%%%\n% pulse\nf_sw ="
 " 20e3\n_dz = 1.5e-6; dead_zone = _dz/(1/f_sw)\n\n% high frequent link\nc_b = "
-"100e-6\nl_cb = 100e-9\n\nl_ph = 20e-6\n\n% high frequency transformer\nn = 1"
+"100e-6\nl_cb = 100e-9\n\nl_ph = 10e-6\n\n% high frequency transformer\nn = 1"
 "\n\nl_m = 30e-3\nl_s = 5e-6\n\nc_s = 0%100e-12\nc_p = 0%100e-12\nc_ps = 0%100"
 "e-12\nr_cs = 0.3e-3\nr_cp = 0.3e-3\nr_cps = 0.3e-3\n\n\n% H bridge\nv_in = 70"
-"0\nvo_ref = 720\n\nuc_init = 0\nc_bus = 1e-3\nl_c_bus = 0%1e-9\n\nr_small = 0"
-".3e-3\nl_small = 1e-9\n\nc_absorb = 0.47e-6\nl_c_absorb = 100e-9\n\nr_on = 13"
-"e-3\nr_parallel = 100e3\nc_parallel = 6e-9\n\n\n% Digital PI controller\nkp ="
-" 0.02    % proportional gain\nki = 0.05    % integral gain\nkd = 0       % de"
-"rivative gain\nts = 2/f_sw  % sample time (s)\n\n\n\n"
+"0\nvo_ref = 720\n\nuc_init = 700\nc_bus = 1e-3\nl_c_bus = 0%1e-9\n\nr_small ="
+" 0.3e-3\nl_small = 1e-9\n\nc_absorb = 0.47e-6\nl_c_absorb = 100e-9\n\nr_on = "
+"13e-3\nr_parallel = 100e3\nc_parallel = 0.2e-9\n\n\n% Digital PI controller\n"
+"kp = 0.02    % proportional gain\nki = 0.05    % integral gain\nkd = 0       "
+"% derivative gain\nts = 2/f_sw  % sample time (s)\n\n\n\n"
   InitialState  "1"
   SystemState   ""
   CodeGenParameterInlining "2"
@@ -55,9 +55,9 @@ Plecs {
   ScriptsDialogGeometry "[943 751 928 304]"
   ScriptsDialogSplitterPos "156"
   Schematic {
-    Location      [0, 25; 1216, 744]
-    ZoomFactor    1.00339
-    SliderPosition [254, 56]
+    Location      [0, 25; 1280, 762]
+    ZoomFactor    0.876809
+    SliderPosition [0, 0]
     ShowBrowser   off
     BrowserWidth  100
     Component {
@@ -131,18 +131,18 @@ Plecs {
       Flipped       off
       Location      [0, 25; 1216, 765]
       State         "AAAA/wAAAAD9AAAAAgAAAAEAAAGVAAAGQfwCAAAAA/sAAAAQAFoAbwBvA"
-"G0AQQByAGUAYQAAAAAA/////wAAAVcA////+wAAABQAUwBhAHYAZQBkAFYAaQBlAHcAcwAAAAAA//"
-"///wAAAOEA////+wAAAAwAVAByAGEAYwBlAHMAAAAAWQAABkEAAADhAP///wAAAAMAAAqwAAABJPw"
-"BAAAAAfsAAAAUAEQAYQB0AGEAVwBpAGQAZwBlAHQAAAAAAAAACrAAAACaAP///wAACrAAAAZQAAAA"
+"G0AQQByAGUAYQAAAAAA/////wAAATYA////+wAAABQAUwBhAHYAZQBkAFYAaQBlAHcAcwAAAAAA//"
+"///wAAAMgA////+wAAAAwAVAByAGEAYwBlAHMAAAAAWQAABkEAAADIAP///wAAAAMAAAqwAAABJPw"
+"BAAAAAfsAAAAUAEQAYQB0AGEAVwBpAGQAZwBlAHQAAAAAAAAACrAAAACKAP///wAACYAAAAWbAAAA"
 "BAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAEAAAAOAFQAbwBvAGwAQgBhAHIBAAAAAP////8AAAAAA"
 "AAAAA=="
       SavedViews    "AAAAAgAAAAA="
-      HeaderState   "AAAA/wAAAAAAAAABAAAAAQAAAAAAAAAAAAAAAAAAAAAL/gMAAAAJAAAAC"
-"QAAAOEAAAABAAAA4QAAAAIAAADhAAAAAwAAAOEAAAAEAAAA4QAAAAUAAADhAAAABgAAAOEAAAAHAA"
-"AA4QAAAAgAAADhAAAKigAAAAsBAAABAAAAAAAAAAAAAAAA4f////8AAACBAAAAAAAAAAsAAACnAAA"
+      HeaderState   "AAAA/wAAAAAAAAABAAAAAQAAAAAAAAAAAAAAAAAAAAAL/gMAAAAJAAAAB"
+"wAAAOEAAAAGAAAA4QAAAAUAAADhAAAABAAAAOEAAAADAAAA4QAAAAIAAADhAAAAAQAAAOEAAAAJAA"
+"AA4QAAAAgAAADhAAAA2QAAAAsBAAABAAAAAAAAAAAAAAAAyP////8AAACBAAAAAAAAAAsAAACnAAA"
 "AAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAA"
 "AAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAA"
-"AnjAAAAAQAAAAAAAAPoAAAAADk="
+"AAyAAAAAQAAAAAAAAPoAAAAADI="
       PlotPalettes  "AAAAAQAAAAEAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAA"
 "AEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
 "AAAAEAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
@@ -542,20 +542,20 @@ Plecs {
       Position      [1240, 555]
       Direction     up
       Flipped       off
-      Location      [308, 84; 952, 823]
+      Location      [307, 168; 984, 647]
       State         "AAAA/wAAAAD9AAAAAgAAAAEAAAGVAAAGQfwCAAAAA/sAAAAQAFoAbwBvA"
-"G0AQQByAGUAYQAAAAAA/////wAAAL0A////+wAAABQAUwBhAHYAZQBkAFYAaQBlAHcAcwAAAAAA//"
-"///wAAAOEA////+wAAAAwAVAByAGEAYwBlAHMAAAAAWQAABkEAAADhAP///wAAAAMAAAAAAAAAAPw"
-"BAAAAAfsAAAAUAEQAYQB0AGEAVwBpAGQAZwBlAHQAAAAAAP////8AAACaAP///wAABaoAAAZOAAAA"
+"G0AQQByAGUAYQAAAAAA/////wAAAKoA////+wAAABQAUwBhAHYAZQBkAFYAaQBlAHcAcwAAAAAA//"
+"///wAAAMgA////+wAAAAwAVAByAGEAYwBlAHMAAAAAWQAABkEAAADIAP///wAAAAMAAAAAAAAAAPw"
+"BAAAAAfsAAAAUAEQAYQB0AGEAVwBpAGQAZwBlAHQAAAAAAP////8AAACKAP///wAABUoAAAORAAAA"
 "BAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAEAAAAOAFQAbwBvAGwAQgBhAHIBAAAAAP////8AAAAAA"
 "AAAAA=="
       SavedViews    "AAAAAgAAAAA="
-      HeaderState   "AAAA/wAAAAAAAAABAAAAAQAAAAAAAAAAAAAAAAAAAAAL/gMAAAAJAAAAC"
-"QAAAOEAAAABAAAA4QAAAAIAAADhAAAAAwAAAOEAAAAEAAAA4QAAAAUAAADhAAAABgAAAOEAAAAHAA"
-"AA4QAAAAgAAADhAAAA4QAAAAsBAAABAAAAAAAAAAAAAAAA4f////8AAACBAAAAAAAAAAsAAACoAAA"
+      HeaderState   "AAAA/wAAAAAAAAABAAAAAQAAAAAAAAAAAAAAAAAAAAAL/gMAAAAJAAAAB"
+"wAAAOEAAAAGAAAA4QAAAAUAAADhAAAABAAAAOEAAAADAAAA4QAAAAIAAADhAAAAAQAAAOEAAAAJAA"
+"AA4QAAAAgAAADhAAAA2gAAAAsBAAABAAAAAAAAAAAAAAAAyP////8AAACBAAAAAAAAAAsAAACoAAA"
 "AAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAA"
 "AAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAA"
-"AA5AAAAAQAAAAAAAAPoAAAAADk="
+"AAyAAAAAQAAAAAAAAPoAAAAADI="
       PlotPalettes  "AAAAAQAAAAEAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAA"
 "AEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="
       Axes          "2"
@@ -1208,7 +1208,7 @@ Plecs {
       Flipped       on
       Parameter {
         Variable      "R"
-        Value         "1e6"
+        Value         "10"
         Show          off
       }
     }
@@ -1257,7 +1257,7 @@ Plecs {
       Flipped       on
       Parameter {
         Variable      "s"
-        Value         "1"
+        Value         "2"
         Show          off
       }
     }
@@ -5460,52 +5460,6 @@ Plecs {
       }
     }
     Component {
-      Type          SignalSwitch
-      Name          "Switch"
-      Show          on
-      Position      [220, 300]
-      Direction     right
-      Flipped       off
-      Parameter {
-        Variable      "Criteria"
-        Value         "3"
-        Show          off
-      }
-      Parameter {
-        Variable      "Threshold"
-        Value         "0"
-        Show          off
-      }
-    }
-    Component {
-      Type          Step
-      Name          "Step"
-      Show          on
-      Position      [155, 250]
-      Direction     right
-      Flipped       off
-      Parameter {
-        Variable      "Time"
-        Value         "0.03"
-        Show          off
-      }
-      Parameter {
-        Variable      "Before"
-        Value         "0"
-        Show          off
-      }
-      Parameter {
-        Variable      "After"
-        Value         "1"
-        Show          off
-      }
-      Parameter {
-        Variable      "DataType"
-        Value         "10"
-        Show          off
-      }
-    }
-    Component {
       Type          Subsystem
       Name          "H_bridge1"
       Show          on
@@ -5877,7 +5831,7 @@ Plecs {
           }
           Parameter {
             Variable      "v_init"
-            Value         "0"
+            Value         "uc_init"
             Show          off
           }
         }
@@ -8384,52 +8338,6 @@ Plecs {
       }
     }
     Component {
-      Type          SignalSwitch
-      Name          "Switch1"
-      Show          on
-      Position      [220, 555]
-      Direction     right
-      Flipped       off
-      Parameter {
-        Variable      "Criteria"
-        Value         "3"
-        Show          off
-      }
-      Parameter {
-        Variable      "Threshold"
-        Value         "0"
-        Show          off
-      }
-    }
-    Component {
-      Type          Step
-      Name          "Step1"
-      Show          on
-      Position      [155, 505]
-      Direction     right
-      Flipped       off
-      Parameter {
-        Variable      "Time"
-        Value         "0.04"
-        Show          off
-      }
-      Parameter {
-        Variable      "Before"
-        Value         "0"
-        Show          off
-      }
-      Parameter {
-        Variable      "After"
-        Value         "1"
-        Show          off
-      }
-      Parameter {
-        Variable      "DataType"
-        Value         "10"
-        Show          off
-      }
-    }
-    Component {
       Type          Subsystem
       Name          "H_bridge2"
       Show          on
@@ -8801,7 +8709,7 @@ Plecs {
           }
           Parameter {
             Variable      "v_init"
-            Value         "0"
+            Value         "uc_init"
             Show          off
           }
         }
@@ -9079,6 +8987,32 @@ Plecs {
         Show          off
       }
     }
+    Component {
+      Type          ManualSignalSwitch
+      Name          "Manual Switch"
+      Show          on
+      Position      [220, 300]
+      Direction     right
+      Flipped       off
+      Parameter {
+        Variable      "SwitchState"
+        Value         "1"
+        Show          off
+      }
+    }
+    Component {
+      Type          ManualSignalSwitch
+      Name          "Manual Switch1"
+      Show          on
+      Position      [220, 555]
+      Direction     right
+      Flipped       off
+      Parameter {
+        Variable      "SwitchState"
+        Value         "2"
+        Show          off
+      }
+    }
     Connection {
       Type          Signal
       SrcComponent  "Vm1"
@@ -9335,7 +9269,7 @@ Plecs {
     }
     Connection {
       Type          Signal
-      SrcComponent  "Switch"
+      SrcComponent  "Manual Switch"
       SrcTerminal   1
       Points        [340, 300]
       DstComponent  "H_bridge1"
@@ -9536,18 +9470,10 @@ Plecs {
     }
     Connection {
       Type          Signal
-      SrcComponent  "Step"
-      SrcTerminal   1
-      Points        [220, 250]
-      DstComponent  "Switch"
-      DstTerminal   4
-    }
-    Connection {
-      Type          Signal
       SrcComponent  "From3"
       SrcTerminal   1
       Points        [180, 290; 180, 295]
-      DstComponent  "Switch"
+      DstComponent  "Manual Switch"
       DstTerminal   2
     }
     Connection {
@@ -9571,7 +9497,7 @@ Plecs {
       SrcComponent  "From6"
       SrcTerminal   1
       Points        [180, 310; 180, 305]
-      DstComponent  "Switch"
+      DstComponent  "Manual Switch"
       DstTerminal   3
     }
     Connection {
@@ -9701,7 +9627,7 @@ Plecs {
     }
     Connection {
       Type          Signal
-      SrcComponent  "Switch1"
+      SrcComponent  "Manual Switch1"
       SrcTerminal   1
       Points        [340, 555]
       DstComponent  "H_bridge2"
@@ -9767,18 +9693,10 @@ Plecs {
     }
     Connection {
       Type          Signal
-      SrcComponent  "Step1"
-      SrcTerminal   1
-      Points        [220, 505]
-      DstComponent  "Switch1"
-      DstTerminal   4
-    }
-    Connection {
-      Type          Signal
       SrcComponent  "From17"
       SrcTerminal   1
       Points        [180, 545; 180, 550]
-      DstComponent  "Switch1"
+      DstComponent  "Manual Switch1"
       DstTerminal   2
     }
     Connection {
@@ -9786,7 +9704,7 @@ Plecs {
       SrcComponent  "From18"
       SrcTerminal   1
       Points        [180, 565; 180, 560]
-      DstComponent  "Switch1"
+      DstComponent  "Manual Switch1"
       DstTerminal   3
     }
     Connection {
