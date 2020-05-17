@@ -111,17 +111,17 @@ Plecs {
       Position      [545, 360]
       Direction     up
       Flipped       off
-      Location      [0, 29; 1280, 781]
-      State         "AAAA/wAAAAD9AAAAAgAAAAEAAAFoAAAEJPwCAAAAA/sAAAAQAFoAbwBvA"
+      Location      [0, 25; 1280, 785]
+      State         "AAAA/wAAAAD9AAAAAgAAAAEAAAFoAAAENPwCAAAAA/sAAAAQAFoAbwBvA"
 "G0AQQByAGUAYQAAAAAA/////wAAATYA////+wAAABQAUwBhAHYAZQBkAFYAaQBlAHcAcwAAAAAA//"
-"///wAAAMgA////+wAAAAwAVAByAGEAYwBlAHMBAAAAUQAABCQAAADIAP///wAAAAMAAAoAAAABh/w"
-"BAAAAAfsAAAAUAEQAYQB0AGEAVwBpAGQAZwBlAHQBAAAAAAAACgAAAACKAP///wAACJAAAAQkAAAA"
+"///wAAAMgA////+wAAAAwAVAByAGEAYwBlAHMBAAAAUQAABDQAAADIAP///wAAAAMAAAoAAAABh/w"
+"BAAAAAfsAAAAUAEQAYQB0AGEAVwBpAGQAZwBlAHQBAAAAAAAACgAAAACKAP///wAACJAAAAQ0AAAA"
 "BAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAEAAAAOAFQAbwBvAGwAQgBhAHIBAAAAAP////8AAAAAA"
 "AAAAA=="
       SavedViews    "AAAAAgAAAAA="
       HeaderState   "AAAA/wAAAAAAAAABAAAAAQAAAAAAAAAAAAAAAAAAAAAL/gMAAAAJAAAAA"
-"gAAAOEAAAADAAAA4QAAAAgAAADhAAAACQAAAOEAAAAEAAAA4QAAAAUAAADhAAAABgAAAOEAAAAHAA"
-"AA4QAAAAEAAADhAAAKAAAAAAsBAAABAAAAAAAAAAAAAAAAyP////8AAACBAAAAAAAAAAsAAACeAAA"
+"QAAAOEAAAACAAAA4QAAAAMAAADhAAAABAAAAOEAAAAFAAAA4QAAAAYAAADhAAAABwAAAOEAAAAIAA"
+"AA4QAAAAkAAADhAAAKAAAAAAsBAAABAAAAAAAAAAAAAAAAyP////8AAACBAAAAAAAAAAsAAACeAAA"
 "AAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAA"
 "AAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAA"
 "AliAAAAAQAAAAAAAAPoAAAAADI="
@@ -1937,75 +1937,6 @@ Plecs {
               }
             }
             Component {
-              Type          Scope
-              Name          "Scope"
-              Show          on
-              Position      [600, 165]
-              Direction     up
-              Flipped       off
-              Location      [0, 0; 0, 0]
-              State         ""
-              SavedViews    ""
-              HeaderState   ""
-              PlotPalettes  ""
-              Axes          "2"
-              TimeRange     "0"
-              ScrollingMode "1"
-              SingleTimeAxis "1"
-              Open          "0"
-              Ts            "-1"
-              SampleLimit   "0"
-              XAxisLabel    ""
-              Axis {
-                Name          ""
-                AutoScale     1
-                MinValue      0
-                MaxValue      1
-                Signals       {}
-                SignalTypes   [ ]
-                Untangle      0
-                KeepBaseline  off
-                BaselineValue 0
-              }
-              Axis {
-                Name          ""
-                AutoScale     1
-                MinValue      0
-                MaxValue      1
-                Signals       {}
-                SignalTypes   [ ]
-                Untangle      0
-                KeepBaseline  off
-                BaselineValue 0
-              }
-              Fourier {
-                SingleXAxis   on
-                AxisLabel     "Frequency"
-                Scaling       0
-                PhaseDisplay  0
-                Axis {
-                  Name          ""
-                  AutoScale     1
-                  MinValue      0
-                  MaxValue      1
-                  Signals       {}
-                  Untangle      0
-                  KeepBaseline  off
-                  BaselineValue 0
-                }
-                Axis {
-                  Name          ""
-                  AutoScale     1
-                  MinValue      0
-                  MaxValue      1
-                  Signals       {}
-                  Untangle      0
-                  KeepBaseline  off
-                  BaselineValue 0
-                }
-              }
-            }
-            Component {
               Type          TriangleGenerator
               Name          "On carrier1"
               Show          on
@@ -2071,75 +2002,6 @@ Plecs {
                 Show          off
               }
             }
-            Component {
-              Type          Scope
-              Name          "Scope1"
-              Show          on
-              Position      [475, 130]
-              Direction     up
-              Flipped       off
-              Location      [0, 0; 0, 0]
-              State         ""
-              SavedViews    ""
-              HeaderState   ""
-              PlotPalettes  ""
-              Axes          "2"
-              TimeRange     "0"
-              ScrollingMode "1"
-              SingleTimeAxis "1"
-              Open          "0"
-              Ts            "-1"
-              SampleLimit   "0"
-              XAxisLabel    ""
-              Axis {
-                Name          ""
-                AutoScale     1
-                MinValue      0
-                MaxValue      1
-                Signals       {}
-                SignalTypes   [ ]
-                Untangle      0
-                KeepBaseline  off
-                BaselineValue 0
-              }
-              Axis {
-                Name          ""
-                AutoScale     1
-                MinValue      0
-                MaxValue      1
-                Signals       {}
-                SignalTypes   [ ]
-                Untangle      0
-                KeepBaseline  off
-                BaselineValue 0
-              }
-              Fourier {
-                SingleXAxis   on
-                AxisLabel     "Frequency"
-                Scaling       0
-                PhaseDisplay  0
-                Axis {
-                  Name          ""
-                  AutoScale     1
-                  MinValue      0
-                  MaxValue      1
-                  Signals       {}
-                  Untangle      0
-                  KeepBaseline  off
-                  BaselineValue 0
-                }
-                Axis {
-                  Name          ""
-                  AutoScale     1
-                  MinValue      0
-                  MaxValue      1
-                  Signals       {}
-                  Untangle      0
-                  KeepBaseline  off
-                  BaselineValue 0
-                }
-              }
-            }
             Connection {
               Type          Signal
               SrcComponent  "Saturation"
@@ -2203,63 +2065,31 @@ Plecs {
               Type          Signal
               SrcComponent  "generator1"
               SrcTerminal   1
-              Points        [460, 235]
-              Branch {
-                DstComponent  "g14"
-                DstTerminal   1
-              }
-              Branch {
-                Points        [460, 160]
-                DstComponent  "Scope"
-                DstTerminal   1
-              }
+              DstComponent  "g14"
+              DstTerminal   1
             }
             Connection {
               Type          Signal
               SrcComponent  "generator"
               SrcTerminal   1
-              Points        [455, 380]
-              Branch {
-                DstComponent  "g23"
-                DstTerminal   1
-              }
-              Branch {
-                Points        [455, 170]
-                DstComponent  "Scope"
-                DstTerminal   2
-              }
+              DstComponent  "g23"
+              DstTerminal   1
             }
             Connection {
               Type          Signal
               SrcComponent  "On carrier"
               SrcTerminal   1
-              Points        [285, 100]
-              Branch {
-                Points        [285, 225]
-                DstComponent  "generator1"
-                DstTerminal   4
-              }
-              Branch {
-                Points        [285, 125]
-                DstComponent  "Scope1"
-                DstTerminal   1
-              }
+              Points        [285, 100; 285, 225]
+              DstComponent  "generator1"
+              DstTerminal   4
             }
             Connection {
               Type          Signal
               SrcComponent  "Off carrier"
               SrcTerminal   1
-              Points        [275, 155]
-              Branch {
-                Points        [275, 245]
-                DstComponent  "generator1"
-                DstTerminal   3
-              }
-              Branch {
-                Points        [275, 135]
-                DstComponent  "Scope1"
-                DstTerminal   2
-              }
+              Points        [275, 155; 275, 245]
+              DstComponent  "generator1"
+              DstTerminal   3
             }
           }
         }
@@ -2790,7 +2620,7 @@ Plecs {
       Flipped       off
       Parameter {
         Variable      "L"
-        Value         "2*l_s + 2*l_ph"
+        Value         "30e-6"
         Show          off
       }
       Parameter {
@@ -5776,7 +5606,7 @@ Plecs {
       Type          Subsystem
       Name          "H_bridge"
       Show          on
-      Position      [395, 160]
+      Position      [400, 160]
       Direction     up
       Flipped       off
       Frame         [-55, -55; 55, 55]
