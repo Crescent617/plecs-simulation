@@ -1,9 +1,9 @@
 .cree/
 .mypy_cache
-*.trace
-*.raw
-*.net
-*.csv
+**/*.trace
+**/*.raw
+**/*.net
+**/*.csv
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

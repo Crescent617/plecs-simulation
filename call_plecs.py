@@ -1,51 +1,54 @@
 import os
+import re
 import shutil
 import sys
 import time
-import re
 import xmlrpc.client
-from collections import abc
+from collections import abc, defaultdict
+from concurrent.futures import as_completed, wait
 from concurrent.futures.thread import ThreadPoolExecutor as PoolExecutor
-from concurrent.futures import wait, as_completed
+from itertools import chain
 from pathlib import Path
-from collections import defaultdict
+from queue import Queue
 
+# ===================== config ==========================
 
 PORT = 1081
-MAX_WORKER = 6
+MAX_WORKER = 8
+MODUEL_NUM = 15
 
 MODEL_VARS = {
-    'module_num': 15,
     'load': 1500,
+    'c_sw': 2.57e-9 * MODUEL_NUM,
+    'c_bus': 1e-3 * MODUEL_NUM,
+    'l_s': 20e-6 / MODUEL_NUM,
 }
 
-SOLVER_OPTS = {
-    'StartTime': 0.0,
-    'StopTime': 1e-4,
-    'MaxStep': 1e-5
-}
-SCOPES = ['Scope']
+SOLVER_OPTS = {'StartTime': 0.0, 'StopTime': 0.5, 'MaxStep': 1e-5}
+SCOPES = ['Scope', 'Scope2']
 
 # define values for parameter sweep
 time_unit = 0.4e-6
 SWEEP_PARAS = {
     # 'load': [25, 50, 75, 100, 150, 200, 400, 800],
-    # 'dz': [i*time_unit for i in range(6)]
-    'v_in': [i*100 for i in range(2, 8)]
+    # 'dz': [i*time_unit for i in range(6)],
+    # 'c_sw': [i*1e-9 for i in (1, 5, 25)],
+    'c_iso': [1e-6 * i for i in (0, 1, 10, 100, 1000)],
+    # 'c_bus': [200*1e-6*i for i in (1, 5, 25)],
+    # 'f_sw': [10e3, 20e3, 40e3]
 }
+
 TRACE_SUFFIX = '.trace'
-TRACES = []
+TRACES = Queue()
+
+
+# ====================== code ===========================
 
 
 class PlecsProxy:
-
     def __init__(self, model_path, port):
-        self._options = {
-            'ModelVars': {},
-            'SolverOpts': {},
-            'AnalysisOpts': {}
-        }
-        assert model_path.exists()
+        self._options = {'ModelVars': {}, 'SolverOpts': {}, 'AnalysisOpts': {}}
+        # assert model_path.exists()
 
         # return the absolute model path
         mdl_abs_path = str(model_path.resolve())
@@ -88,7 +91,8 @@ class PlecsProxy:
         """
         if not trace_name:
             trace_name = ', '.join(
-                f'{k} = {v}' for k, v in self._options['ModelVars'].items())
+                f'{k} = {v}' for k, v in self._options['ModelVars'].items()
+            )
 
         for scp in self._scopes:
             self._handler.scope(scp, 'HoldTrace', trace_name[:max_name_len])
@@ -97,7 +101,7 @@ class PlecsProxy:
         for scp in self._scopes:
             name = re.sub(r'[\/]', '_', scp)
             self._handler.scope(scp, 'SaveTraces', name + TRACE_SUFFIX)
-            TRACES.append(name + TRACE_SUFFIX)
+            TRACES.put(name + TRACE_SUFFIX)
 
     def load_traces(self, filename, scope=None):
         if not scope:
@@ -119,19 +123,28 @@ def get_time():
     return time.strftime('[%Y-%m-%d %H:%M:%S]', time.localtime())
 
 
-def info(*args):
-    print(get_time(), *args)
+def info(*args, **kwargs):
+    print(get_time(), *args, **kwargs)
 
 
 def bar(*args):
-    print()
     temp = '=' * 20
-    print(temp, *args, temp)
+    print('\n', temp, *args, temp)
 
 
 class Worker:
-
     def __init__(self, name: str, tool: PlecsProxy, task: dict):
+        # init
+        for scp in SCOPES:
+            tool.add_scope(scp)
+            tool.clear()
+
+        # init the parameters for simulation
+        for k, v in MODEL_VARS.items():
+            tool.set_model_var(k, v)
+        for k, v in SOLVER_OPTS.items():
+            tool.set_solver_opt(k, v)
+
         self.name = name
         self.tool = tool
         self.task = task
@@ -155,68 +168,63 @@ class Worker:
         return re.search(r'({.*})', str(self.task)).group()
 
 
-def init_worker(worker: Worker):
-    plecs = worker.tool
-    # init
-    for scp in SCOPES:
-        plecs.add_scope(scp)
-        plecs.clear()
+if __name__ == "__main__":
 
-    # init the parameters for simulation
-    for k, v in MODEL_VARS.items():
-        plecs.set_model_var(k, v)
-    for k, v in SOLVER_OPTS.items():
-        plecs.set_solver_opt(k, v)
-    return worker
+    _, model_file = sys.argv
+    assert os.path.isfile(model_file)
 
+    os.chdir(os.path.dirname(__file__))
 
-# change dir
-_, model_file = sys.argv
+    base_model = Path(Path(model_file).name)
 
-os.chdir(os.path.dirname(__file__))
+    models = [base_model]
 
-base_model = Path(Path(model_file).name)
+    real_worker_num = min(MAX_WORKER, max(len(v) for v in SWEEP_PARAS.values()))
 
-models = [base_model]
-for i in range(1, MAX_WORKER):
-    new_path = Path('~'*i + base_model.name)
-    shutil.copy(base_model, new_path)
-    models.append(new_path)
+    for i in range(1, real_worker_num):
+        mdl = Path('~' * i + base_model.name)
+        shutil.copy(base_model, mdl)
+        models.append(mdl)
 
-workers = []
-for mdl in models:
-    w = Worker(mdl.name, PlecsProxy(mdl, port=PORT), defaultdict(list))
-    workers.append(init_worker(w))
+    workers = []
+    for mdl in models:
+        w = Worker(mdl.name, PlecsProxy(mdl, port=PORT), defaultdict(list))
+        workers.append(w)
 
-# assign task for each worker
-for k, vals in SWEEP_PARAS.items():
-    i = 0
-    while vals:
-        workers[i].task[k].append(vals.pop())
-        i = (i + 1) % MAX_WORKER
+    # assign task for each worker
+    for k, vals in SWEEP_PARAS.items():
+        i = 0
+        while vals:
+            workers[i].task[k].append(vals.pop())
+            i = (i + 1) % real_worker_num
 
-# print tasks
-bar('tasks')
-print(*[f'worker {i}: {w}' for i, w in enumerate(workers)], sep='\n')
+    # print tasks
+    bar('tasks assignment')
+    info(*[f'worker {i}: {w}' for i, w in enumerate(workers)], sep='\n')
 
-bar('start simulation')
-# go go go!
-with PoolExecutor(max_workers=MAX_WORKER) as executor:
-    futures = [executor.submit(w.run) for w in workers]
-    wait(futures)
+    # go go go!
+    bar('start simulation')
 
-bar('simulation done')
-# load traces
-base_worker = workers[0]
-for tr in TRACES:
-    base_worker.tool.load_traces(tr)
+    with PoolExecutor(max_workers=real_worker_num) as executor:
+        futures = [executor.submit(w.run) for w in workers]
+        wait(futures)
+        # for future in as_completed(futures):
 
-bar('traces load done')
+    # load traces
+    base_worker = workers[0]
 
-# rm temp file
-for p in models[1:] + TRACES:
-    assert p != base_model
-    os.remove(p)
-    info('removed:', p)
+    while not TRACES.empty():
+        tr = TRACES.get()
+        print('trace:', tr)
+        base_worker.tool.load_traces(tr)
+        os.remove(tr)
 
-bar('successful')
+    bar('simulation done')
+
+    # rm temp file
+    for p in models[1:]:
+        assert p != base_model
+        os.remove(p)
+        info('removed:', p)
+
+    bar('successful')
