@@ -15,13 +15,13 @@ from queue import Queue
 
 PORT = 1081
 MAX_WORKER = 8
-MODUEL_NUM = 15
+MODULE_NUM = 15
 
 MODEL_VARS = {
     'load': 1500,
-    'c_sw': 2.57e-9 * MODUEL_NUM,
-    'c_bus': 1e-3 * MODUEL_NUM,
-    'l_s': 20e-6 / MODUEL_NUM,
+    'c_sw': 2.57e-9 * MODULE_NUM,
+    'c_bus': 1e-3 * MODULE_NUM,
+    'l_s': 20e-6 / MODULE_NUM,
 }
 
 SOLVER_OPTS = {'StartTime': 0.0, 'StopTime': 0.5, 'MaxStep': 1e-5}
@@ -38,11 +38,10 @@ SWEEP_PARAS = {
     # 'f_sw': [10e3, 20e3, 40e3]
 }
 
+# ====================== code ===========================
+
 TRACE_SUFFIX = '.trace'
 TRACES = Queue()
-
-
-# ====================== code ===========================
 
 
 class PlecsProxy:

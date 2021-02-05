@@ -4,6 +4,7 @@
 **/*.raw
 **/*.net
 **/*.csv
+plot/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
